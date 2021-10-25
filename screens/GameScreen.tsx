@@ -20,7 +20,7 @@ export const GameScreen: React.FC<GameScreenProps> = ({ number }) => {
   const { setRoute } = React.useContext(ScreenRouterContext)
 
   const tryToGuess = (min: number, max: number) => {
-    if (min < minBoundary.current || max > maxBoundary.current) {
+    if (min > number || max < number) {
       return Alert.alert("Don't lie!", "We know that it's wrong, don't we?")
     }
 
