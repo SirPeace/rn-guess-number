@@ -6,25 +6,52 @@ import {
   Button,
   TouchableWithoutFeedback,
   Keyboard,
+  Alert,
 } from "react-native"
 
 import { Card } from "../components/UI/Card"
 import { Input } from "../components/UI/Input"
 import colors from "../constants/colors"
+import gameRules from "../constants/gameRules"
+import { ScreenRouterContext } from "../contexts/ScreenRouterContext"
 
 export const StartGameScreen: React.FC = () => {
   const [numberToGuess, setNumberToGuess] = React.useState("")
+  const { setRoute } = React.useContext(ScreenRouterContext)
 
   const onNumberChange = (value: string) => {
     setNumberToGuess(value.replace(/[^0-9]/g, ""))
   }
 
+  const onConfirm = () => {
+    Keyboard.dismiss()
+
+    let number = Number.parseInt(numberToGuess)
+
+    if (
+      Number.isNaN(number) ||
+      number < gameRules.minNumber ||
+      number > gameRules.maxNumber
+    ) {
+      return Alert.alert(
+        "Invalid number",
+        `Type in integer between ${gameRules.minNumber} and ${gameRules.maxNumber}`,
+        [{ text: "OK", onPress: () => setNumberToGuess("") }]
+      )
+    }
+
+    setRoute({
+      name: "game",
+      params: { number },
+    })
+  }
+
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <View style={styles.screen}>
-        <Card style={styles.card}>
+        <View style={{ marginTop: "-50%" }}>
           <Text style={styles.cardTitle}>Start a New Game!</Text>
-          <View>
+          <Card style={styles.card}>
             <View style={{ marginBottom: 20 }}>
               <Input
                 label="Enter a Number"
@@ -35,15 +62,23 @@ export const StartGameScreen: React.FC = () => {
             </View>
 
             <View style={{ flexDirection: "row" }}>
-              <View style={{ flex: 1, marginRight: 5 }}>
-                <Button title="Reset" color={colors.secondary} />
+              <View style={styles.button}>
+                <Button
+                  onPress={() => setNumberToGuess("")}
+                  title="Reset"
+                  color={colors.secondary}
+                />
               </View>
-              <View style={{ flex: 1 }}>
-                <Button title="Confirm" color={colors.primary} />
+              <View style={styles.button}>
+                <Button
+                  onPress={onConfirm}
+                  title="Confirm"
+                  color={colors.primary}
+                />
               </View>
             </View>
-          </View>
-        </Card>
+          </Card>
+        </View>
       </View>
     </TouchableWithoutFeedback>
   )
@@ -52,8 +87,8 @@ export const StartGameScreen: React.FC = () => {
 const styles = StyleSheet.create({
   screen: {
     flex: 1,
+    justifyContent: "center",
     alignItems: "center",
-    marginTop: 20,
   },
 
   card: {
@@ -65,5 +100,10 @@ const styles = StyleSheet.create({
     fontSize: 20,
     textAlign: "center",
     marginBottom: 15,
+  },
+
+  button: {
+    flex: 1,
+    marginHorizontal: 5,
   },
 })
