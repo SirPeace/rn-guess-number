@@ -8,25 +8,27 @@ type GameScreenProps = {
   number: number
 }
 
-const exclude: number[] = []
-let triesCount = 0
-
 export const GameScreen: React.FC<GameScreenProps> = ({ number }) => {
   const [currentGuess, setCurrentGuess] = React.useState(
     getRandomIntBetween(gameRules.minNumber, gameRules.maxNumber)
   )
 
+  const maxBoundary = React.useRef(gameRules.maxNumber)
+  const minBoundary = React.useRef(gameRules.minNumber)
+  const triesCount = React.useRef(0)
+
   const { setRoute } = React.useContext(ScreenRouterContext)
 
-  const tryToGuess = (first: number, second: number) => {
-    let randomInt = getRandomIntBetween(first, second)
-
-    for (let i = 0; exclude.includes(randomInt); i++) {
-      randomInt = getRandomIntBetween(first, second)
+  const tryToGuess = (min: number, max: number) => {
+    if (min < minBoundary.current || max > maxBoundary.current) {
+      return Alert.alert("Don't lie!", "We know that it's wrong, don't we?")
     }
 
-    exclude.push(randomInt)
-    triesCount++
+    let randomInt = getRandomIntBetween(min, max, currentGuess)
+
+    minBoundary.current = min
+    maxBoundary.current = max
+    triesCount.current++
 
     setCurrentGuess(randomInt)
   }
@@ -34,7 +36,7 @@ export const GameScreen: React.FC<GameScreenProps> = ({ number }) => {
   if (currentGuess === number) {
     Alert.alert(
       "Game finished!",
-      `Computer found out your guessed number ${number} in ${triesCount} tries.`,
+      `Computer found out your guessed number ${number} in ${triesCount.current} tries.`,
       [
         {
           text: "Back to menu",
@@ -55,14 +57,14 @@ export const GameScreen: React.FC<GameScreenProps> = ({ number }) => {
         <View style={styles.buttonsContainer}>
           <View style={styles.button}>
             <Button
-              onPress={() => tryToGuess(gameRules.minNumber, currentGuess)}
+              onPress={() => tryToGuess(minBoundary.current, currentGuess)}
               title="Lower"
               color={colors.secondary}
             />
           </View>
           <View style={styles.button}>
             <Button
-              onPress={() => tryToGuess(currentGuess + 1, gameRules.maxNumber)}
+              onPress={() => tryToGuess(currentGuess + 1, maxBoundary.current)}
               title="Greater"
               color={colors.primary}
             />
@@ -128,11 +130,19 @@ const styles = StyleSheet.create({
  * @param first  First number
  * @param second  Second number
  */
-function getRandomIntBetween(first: number, second: number): number {
+function getRandomIntBetween(
+  first: number,
+  second: number,
+  exclude: number | null = null
+): number {
   const min = Math.round(Math.min(first, second))
   const max = Math.round(Math.max(first, second))
 
   let randomInt = Math.floor(Math.random() * (max - min)) + min
+
+  while (randomInt === exclude) {
+    randomInt = getRandomIntBetween(min, max, exclude)
+  }
 
   return randomInt
 }
