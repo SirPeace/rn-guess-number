@@ -1,5 +1,6 @@
 import React from "react"
 import { ScreenRouterContext } from "../contexts/ScreenRouterContext"
+import { GameOverScreen } from "./GameOverScreen"
 import { GameScreen } from "./GameScreen"
 import { StartGameScreen } from "./StartGameScreen"
 
@@ -19,6 +20,12 @@ export const ScreenRouter: React.FC = () => {
     <ScreenRouterContext.Provider value={{ setRoute }}>
       {route.name === "startGame" && <StartGameScreen />}
       {route.name === "game" && <GameScreen number={route.params?.number} />}
+      {route.name === "gameOver" && (
+        <GameOverScreen
+          number={route.params?.number}
+          triesCount={route.params?.triesCount}
+        />
+      )}
     </ScreenRouterContext.Provider>
   )
 }

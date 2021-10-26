@@ -50,7 +50,7 @@ export const StartGameScreen: React.FC = () => {
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <View style={styles.screen}>
         <View style={{ marginTop: "-50%" }}>
-          <Text style={styles.cardTitle}>Start a New Game!</Text>
+          <Text style={styles.title}>Start a New Game!</Text>
           <Card style={styles.card}>
             <View style={{ marginBottom: 20 }}>
               <Input
@@ -96,7 +96,7 @@ const styles = StyleSheet.create({
     maxWidth: "90%",
   },
 
-  cardTitle: {
+  title: {
     fontSize: 20,
     textAlign: "center",
     marginBottom: 15,
