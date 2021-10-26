@@ -33,19 +33,21 @@ export const GameScreen: React.FC<GameScreenProps> = ({ number }) => {
     setCurrentGuess(randomInt)
   }
 
-  if (currentGuess === number) {
-    Alert.alert(
-      "Game finished!",
-      `Computer found out your guessed number ${number} in ${triesCount.current} tries.`,
-      [
-        {
-          text: "Back to menu",
-          style: "cancel",
-          onPress: () => setRoute({ name: "startGame" }),
-        },
-      ]
-    )
-  }
+  React.useEffect(() => {
+    if (currentGuess === number) {
+      Alert.alert(
+        "Game finished!",
+        `Computer found out your guessed number ${number} in ${triesCount.current} tries.`,
+        [
+          {
+            text: "Back to menu",
+            style: "cancel",
+            onPress: () => setRoute({ name: "startGame" }),
+          },
+        ]
+      )
+    }
+  }, [currentGuess])
 
   return (
     <View style={styles.screen}>
