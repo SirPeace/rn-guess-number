@@ -1,8 +1,10 @@
 import React from "react"
-import { View, Text, StyleSheet, Button, Alert } from "react-native"
+import { View, StyleSheet, Button, Alert } from "react-native"
+
 import colors from "../constants/colors"
 import gameRules from "../constants/gameRules"
 import { ScreenRouterContext } from "../contexts/ScreenRouterContext"
+import { Text } from "../components/UI/Text"
 
 type GameScreenProps = {
   number: number
@@ -48,9 +50,11 @@ export const GameScreen: React.FC<GameScreenProps> = ({ number }) => {
   return (
     <View style={styles.screen}>
       <View style={styles.container}>
-        <Text>Opponent's guess</Text>
+        <Text>Opponent's guess:</Text>
         <View style={styles.guessContainer}>
-          <Text style={styles.guessValue}>{currentGuess}</Text>
+          <Text bold style={styles.guessValue}>
+            {currentGuess}
+          </Text>
         </View>
         <View style={styles.buttonsContainer}>
           <View style={styles.button}>
@@ -104,7 +108,6 @@ const styles = StyleSheet.create({
   guessValue: {
     fontSize: 22,
     color: colors.primary,
-    fontWeight: "bold",
   },
 
   backButton: {

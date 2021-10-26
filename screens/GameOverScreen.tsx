@@ -1,5 +1,8 @@
 import React from "react"
-import { View, Text, StyleSheet, Button } from "react-native"
+import { Button, StyleSheet, View } from "react-native"
+
+import { Text } from "../components/UI/Text"
+import { TitleText } from "../components/UI/TitleText"
 import { ScreenRouterContext } from "../contexts/ScreenRouterContext"
 
 type GameOverScreenProps = {
@@ -13,17 +16,17 @@ export const GameOverScreen: React.FC<GameOverScreenProps> = props => {
   return (
     <View style={styles.screen}>
       <View style={{ width: "80%" }}>
-        <Text style={styles.title}>Game Over!</Text>
+        <TitleText style={styles.title}>Game Over!</TitleText>
         <Text style={styles.body}>
           <Text>
             Guessed number:&nbsp;
-            <Text style={styles.strong}>{props.number}</Text>
+            <Text bold>{props.number}</Text>
             {"\n"}
           </Text>
 
           <Text>
             Attempts count:&nbsp;
-            <Text style={styles.strong}>{props.triesCount}</Text>
+            <Text bold>{props.triesCount}</Text>
           </Text>
         </Text>
         <Button
@@ -43,16 +46,11 @@ const styles = StyleSheet.create({
   },
 
   title: {
-    fontSize: 20,
     marginVertical: 20,
     textAlign: "center",
   },
 
   body: {
     marginBottom: 20,
-  },
-
-  strong: {
-    fontWeight: "bold",
   },
 })

@@ -1,7 +1,6 @@
 import React from "react"
 import {
   View,
-  Text,
   StyleSheet,
   Button,
   TouchableWithoutFeedback,
@@ -11,6 +10,7 @@ import {
 
 import { Card } from "../components/UI/Card"
 import { Input } from "../components/UI/Input"
+import { TitleText } from "../components/UI/TitleText"
 import colors from "../constants/colors"
 import gameRules from "../constants/gameRules"
 import { ScreenRouterContext } from "../contexts/ScreenRouterContext"
@@ -50,7 +50,7 @@ export const StartGameScreen: React.FC = () => {
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <View style={styles.screen}>
         <View style={{ marginTop: "-50%" }}>
-          <Text style={styles.title}>Start a New Game!</Text>
+          <TitleText style={styles.title}>Start a New Game!</TitleText>
           <Card style={styles.card}>
             <View style={{ marginBottom: 20 }}>
               <Input
@@ -97,7 +97,6 @@ const styles = StyleSheet.create({
   },
 
   title: {
-    fontSize: 20,
     textAlign: "center",
     marginBottom: 15,
   },

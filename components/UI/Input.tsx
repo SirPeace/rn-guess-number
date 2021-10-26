@@ -25,5 +25,6 @@ const styles = StyleSheet.create({
     fontSize: 12,
     color: "#777",
     marginBottom: 2,
+    fontFamily: "Open Sans",
   },
 })
