@@ -18,7 +18,9 @@ export const ScreenRouter: React.FC = () => {
 
   return (
     <ScreenRouterContext.Provider value={{ setRoute }}>
-      {route.name === "startGame" && <StartGameScreen />}
+      {route.name === "startGame" && (
+        <GameOverScreen number={1} triesCount={1} />
+      )}
       {route.name === "game" && <GameScreen number={route.params?.number} />}
       {route.name === "gameOver" && (
         <GameOverScreen
