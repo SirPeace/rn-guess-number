@@ -1,9 +1,10 @@
 import React from "react"
-import { View, StyleSheet, Button, Alert } from "react-native"
+import { View, StyleSheet, Alert } from "react-native"
 
 import colors from "../constants/colors"
 import gameRules from "../constants/gameRules"
 import { ScreenRouterContext } from "../contexts/ScreenRouterContext"
+import { Button } from "../components/UI/Button"
 import { Text } from "../components/UI/Text"
 
 type GameScreenProps = {
@@ -61,14 +62,13 @@ export const GameScreen: React.FC<GameScreenProps> = ({ number }) => {
             <Button
               onPress={() => tryToGuess(minBoundary.current, currentGuess)}
               title="Lower"
-              color={colors.secondary}
             />
           </View>
           <View style={styles.button}>
             <Button
               onPress={() => tryToGuess(currentGuess + 1, maxBoundary.current)}
               title="Greater"
-              color={colors.primary}
+              type="primary"
             />
           </View>
         </View>
@@ -78,6 +78,8 @@ export const GameScreen: React.FC<GameScreenProps> = ({ number }) => {
         <Button
           title="Back to menu"
           onPress={() => setRoute({ name: "startGame" })}
+          type="primary"
+          flat
         />
       </View>
     </View>

@@ -1,6 +1,7 @@
 import React from "react"
-import { Button, Image, StyleSheet, View } from "react-native"
+import { Image, StyleSheet, View } from "react-native"
 
+import { Button } from "../components/UI/Button"
 import { Text } from "../components/UI/Text"
 import { TitleText } from "../components/UI/TitleText"
 import colors from "../constants/colors"
@@ -17,7 +18,7 @@ export const GameOverScreen: React.FC<GameOverScreenProps> = props => {
   return (
     <View style={styles.screen}>
       <View style={styles.container}>
-        <TitleText style={styles.title}>Game Over!</TitleText>
+        <TitleText style={styles.title}>The Game is Over!</TitleText>
 
         <View style={{ alignItems: "center" }}>
           <View style={styles.imageContainer}>
@@ -45,6 +46,7 @@ export const GameOverScreen: React.FC<GameOverScreenProps> = props => {
         <Button
           title="Back to menu"
           onPress={() => setRoute({ name: "startGame" })}
+          type="primary"
         />
       </View>
     </View>
@@ -68,6 +70,7 @@ const styles = StyleSheet.create({
 
   body: {
     marginBottom: 20,
+    textAlign: "center",
   },
 
   image: {

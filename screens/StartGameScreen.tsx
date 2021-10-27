@@ -2,16 +2,15 @@ import React from "react"
 import {
   View,
   StyleSheet,
-  Button,
   TouchableWithoutFeedback,
   Keyboard,
   Alert,
 } from "react-native"
 
+import { Button } from "../components/UI/Button"
 import { Card } from "../components/UI/Card"
 import { Input } from "../components/UI/Input"
 import { TitleText } from "../components/UI/TitleText"
-import colors from "../constants/colors"
 import gameRules from "../constants/gameRules"
 import { ScreenRouterContext } from "../contexts/ScreenRouterContext"
 
@@ -63,18 +62,10 @@ export const StartGameScreen: React.FC = () => {
 
             <View style={{ flexDirection: "row" }}>
               <View style={styles.button}>
-                <Button
-                  onPress={() => setNumberToGuess("")}
-                  title="Reset"
-                  color={colors.secondary}
-                />
+                <Button onPress={() => setNumberToGuess("")} title="Reset" />
               </View>
               <View style={styles.button}>
-                <Button
-                  onPress={onConfirm}
-                  title="Confirm"
-                  color={colors.primary}
-                />
+                <Button onPress={onConfirm} title="Confirm" type="primary" />
               </View>
             </View>
           </Card>
