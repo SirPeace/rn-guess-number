@@ -1,5 +1,6 @@
 import React from "react"
 import { View, StyleSheet, Alert } from "react-native"
+import { AntDesign } from "@expo/vector-icons"
 
 import colors from "../constants/colors"
 import gameRules from "../constants/gameRules"
@@ -61,13 +62,13 @@ export const GameScreen: React.FC<GameScreenProps> = ({ number }) => {
           <View style={styles.button}>
             <Button
               onPress={() => tryToGuess(minBoundary.current, currentGuess)}
-              title="Lower"
+              title={<AntDesign name="minus" size={24} />}
             />
           </View>
           <View style={styles.button}>
             <Button
               onPress={() => tryToGuess(currentGuess + 1, maxBoundary.current)}
-              title="Greater"
+              title={<AntDesign name="plus" size={24} />}
               type="primary"
             />
           </View>

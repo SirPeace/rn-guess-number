@@ -6,7 +6,7 @@ import { Text } from "./Text"
 
 type ButtonProps = {
   onPress: () => void
-  title: string
+  title: string | JSX.Element
   type?: "primary" | "secondary"
   flat?: boolean
 }
