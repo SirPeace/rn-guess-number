@@ -1,7 +1,7 @@
 import React from "react"
 import { View, StyleSheet, ViewStyle } from "react-native"
 
-import { Text } from "./UI/Text"
+import Text from "./UI/Text"
 
 type GuessProps = {
   value: string
@@ -9,7 +9,7 @@ type GuessProps = {
   style: ViewStyle
 }
 
-export const GuessHistoryItem: React.FC<GuessProps> = props => (
+const GuessHistoryItem: React.FC<GuessProps> = props => (
   <View style={{ ...styles.guess, ...props.style }}>
     <Text>
       #{props.index}: {props.value}
@@ -26,3 +26,5 @@ const styles = StyleSheet.create({
     padding: 10,
   },
 })
+
+export default GuessHistoryItem

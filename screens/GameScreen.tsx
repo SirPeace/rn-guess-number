@@ -4,10 +4,10 @@ import { AntDesign } from "@expo/vector-icons"
 
 import gameRules from "../constants/gameRules"
 import { ScreenRouterContext } from "../contexts/ScreenRouterContext"
-import { Button } from "../components/UI/Button"
-import { Text } from "../components/UI/Text"
-import { GuessHistoryItem } from "../components/GuessHistoryItem"
-import { GuessValue } from "../components/GuessValue"
+import Button from "../components/UI/Button"
+import Text from "../components/UI/Text"
+import GuessHistoryItem from "../components/GuessHistoryItem"
+import GuessValue from "../components/GuessValue"
 
 type GameScreenProps = {
   number: number
@@ -17,7 +17,7 @@ const initialGuess = String(
   getRandomIntBetween(gameRules.minNumber, gameRules.maxNumber)
 )
 
-export const GameScreen: React.FC<GameScreenProps> = ({ number }) => {
+const GameScreen: React.FC<GameScreenProps> = ({ number }) => {
   const [guessesHistory, setGuessesHistory] = React.useState([initialGuess])
   const [currentGuess, setCurrentGuess] = React.useState(initialGuess)
 
@@ -166,3 +166,5 @@ function getRandomIntBetween(
 
   return randomInt
 }
+
+export default GameScreen

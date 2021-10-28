@@ -1,8 +1,8 @@
 import React from "react"
 import { ScreenRouterContext } from "../contexts/ScreenRouterContext"
-import { GameOverScreen } from "./GameOverScreen"
-import { GameScreen } from "./GameScreen"
-import { StartGameScreen } from "./StartGameScreen"
+import GameOverScreen from "./GameOverScreen"
+import GameScreen from "./GameScreen"
+import StartGameScreen from "./StartGameScreen"
 
 export type Route = {
   name: string
@@ -11,7 +11,7 @@ export type Route = {
   }
 }
 
-export const ScreenRouter: React.FC = () => {
+const ScreenRouter: React.FC = () => {
   const [route, setRoute] = React.useState<Route>({
     name: "startGame",
   })
@@ -29,3 +29,5 @@ export const ScreenRouter: React.FC = () => {
     </ScreenRouterContext.Provider>
   )
 }
+
+export default ScreenRouter

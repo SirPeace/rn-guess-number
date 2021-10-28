@@ -5,7 +5,7 @@ type anyAttributes = {
   [k: string]: any
 }
 
-export const Card: React.FC<anyAttributes> = ({ children, style }) => (
+const Card: React.FC<anyAttributes> = ({ children, style }) => (
   <View style={{ ...styles.card, ...style }}>{children}</View>
 )
 
@@ -21,3 +21,5 @@ const styles = StyleSheet.create({
     elevation: 5,
   },
 })
+
+export default Card

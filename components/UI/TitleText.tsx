@@ -1,7 +1,7 @@
 import React from "react"
 import { Text as NativeText, StyleSheet } from "react-native"
 
-export const TitleText: React.FC<{ [k: string]: any }> = props => (
+const TitleText: React.FC<{ [k: string]: any }> = props => (
   <NativeText style={{ ...styles.title, ...props.style }}>
     {props.children}
   </NativeText>
@@ -13,3 +13,5 @@ const styles = StyleSheet.create({
     fontSize: 20,
   },
 })
+
+export default TitleText

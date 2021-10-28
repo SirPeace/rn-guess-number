@@ -1,9 +1,9 @@
 import React from "react"
 import { Image, StyleSheet, View } from "react-native"
 
-import { Button } from "../components/UI/Button"
-import { Text } from "../components/UI/Text"
-import { TitleText } from "../components/UI/TitleText"
+import Button from "../components/UI/Button"
+import Text from "../components/UI/Text"
+import TitleText from "../components/UI/TitleText"
 import colors from "../constants/colors"
 import { ScreenRouterContext } from "../contexts/ScreenRouterContext"
 
@@ -12,7 +12,7 @@ type GameOverScreenProps = {
   triesCount: number
 }
 
-export const GameOverScreen: React.FC<GameOverScreenProps> = props => {
+const GameOverScreen: React.FC<GameOverScreenProps> = props => {
   const { setRoute } = React.useContext(ScreenRouterContext)
 
   return (
@@ -89,3 +89,5 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
 })
+
+export default GameOverScreen

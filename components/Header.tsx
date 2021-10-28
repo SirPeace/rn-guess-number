@@ -7,7 +7,7 @@ type HeaderComponentProps = {
   title: string
 }
 
-export const Header: React.FC<HeaderComponentProps> = ({ title }) => (
+const Header: React.FC<HeaderComponentProps> = ({ title }) => (
   <View style={styles.header}>
     <Text style={styles.title}>{title}</Text>
   </View>
@@ -30,3 +30,5 @@ const styles = StyleSheet.create({
     fontFamily: "Open Sans",
   },
 })
+
+export default Header

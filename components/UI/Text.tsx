@@ -6,7 +6,7 @@ type TextProps = {
   [k: string]: any
 }
 
-export const Text: React.FC<TextProps> = props => {
+const Text: React.FC<TextProps> = props => {
   const textStyles = props.bold
     ? { ...styles.textBold, ...props.style }
     : { ...styles.text, ...props.style }
@@ -23,3 +23,5 @@ const styles = StyleSheet.create({
     fontFamily: "Open Sans Bold",
   },
 })
+
+export default Text

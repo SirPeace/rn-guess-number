@@ -1,13 +1,14 @@
 import React from "react"
 import { View, StyleSheet } from "react-native"
+
 import colors from "../constants/colors"
-import { Text } from "./UI/Text"
+import Text from "./UI/Text"
 
 type GuessValueProps = {
   value: string
 }
 
-export const GuessValue: React.FC<GuessValueProps> = props => (
+const GuessValue: React.FC<GuessValueProps> = props => (
   <View style={styles.guessContainer}>
     <Text bold style={styles.guessValue}>
       {props.value}
@@ -30,3 +31,5 @@ const styles = StyleSheet.create({
     color: colors.primary,
   },
 })
+
+export default GuessValue

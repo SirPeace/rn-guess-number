@@ -2,7 +2,7 @@ import React from "react"
 import { View, StyleSheet, TouchableOpacity } from "react-native"
 
 import colors from "../../constants/colors"
-import { Text } from "./Text"
+import Text from "./Text"
 
 type ButtonProps = {
   onPress: () => void
@@ -11,7 +11,7 @@ type ButtonProps = {
   flat?: boolean
 }
 
-export const Button: React.FC<ButtonProps> = props => {
+const Button: React.FC<ButtonProps> = props => {
   let buttonStyles = styles.button
 
   if (props.type === "primary")
@@ -49,3 +49,5 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
 })
+
+export default Button

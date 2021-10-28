@@ -7,14 +7,14 @@ import {
   Alert,
 } from "react-native"
 
-import { Button } from "../components/UI/Button"
-import { Card } from "../components/UI/Card"
-import { Input } from "../components/UI/Input"
-import { TitleText } from "../components/UI/TitleText"
+import Button from "../components/UI/Button"
+import Card from "../components/UI/Card"
+import Input from "../components/UI/Input"
+import TitleText from "../components/UI/TitleText"
 import gameRules from "../constants/gameRules"
 import { ScreenRouterContext } from "../contexts/ScreenRouterContext"
 
-export const StartGameScreen: React.FC = () => {
+const StartGameScreen: React.FC = () => {
   const [numberToGuess, setNumberToGuess] = React.useState("")
   const { setRoute } = React.useContext(ScreenRouterContext)
 
@@ -97,3 +97,5 @@ const styles = StyleSheet.create({
     marginHorizontal: 5,
   },
 })
+
+export default StartGameScreen

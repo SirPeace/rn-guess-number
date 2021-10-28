@@ -6,7 +6,7 @@ type InputProps = {
   [k: string]: any
 }
 
-export const Input: React.FC<InputProps> = props => (
+const Input: React.FC<InputProps> = props => (
   <View>
     {props.label && <Text style={styles.inputLabel}>{props.label}</Text>}
     <TextInput {...props} style={{ ...styles.input, ...props.style }} />
@@ -28,3 +28,5 @@ const styles = StyleSheet.create({
     fontFamily: "Open Sans",
   },
 })
+
+export default Input
