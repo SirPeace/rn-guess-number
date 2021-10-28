@@ -7,13 +7,6 @@ import * as Font from "expo-font"
 import Header from "./components/Header"
 import ScreenRouter from "./screens/ScreenRouter"
 
-const loadFonts = () => {
-  return Font.loadAsync({
-    "Open Sans": require("./assets/fonts/OpenSans-Regular.ttf"),
-    "Open Sans Bold": require("./assets/fonts/OpenSans-Bold.ttf"),
-  })
-}
-
 export default function App() {
   const [loading, setLoading] = React.useState(true)
 
@@ -40,3 +33,9 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
   },
 })
+
+const loadFonts = () =>
+  Font.loadAsync({
+    "Open Sans": require("./assets/fonts/OpenSans-Regular.ttf"),
+    "Open Sans Bold": require("./assets/fonts/OpenSans-Bold.ttf"),
+  })
