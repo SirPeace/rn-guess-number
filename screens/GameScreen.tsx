@@ -1,13 +1,12 @@
 import React from "react"
-import { View, StyleSheet, Alert, FlatList, ScrollView } from "react-native"
-import { AntDesign } from "@expo/vector-icons"
+import { View, StyleSheet, Alert, FlatList } from "react-native"
 
 import gameRules from "../constants/gameRules"
 import { ScreenRouterContext } from "../contexts/ScreenRouterContext"
 import Button from "../components/UI/Button"
 import Text from "../components/UI/Text"
 import GuessHistoryItem from "../components/GuessHistoryItem"
-import GuessValue from "../components/GuessValue"
+import GameGuessControls from "../components/GameGuessControls"
 
 type GameScreenProps = {
   number: number
@@ -60,29 +59,16 @@ const GameScreen: React.FC<GameScreenProps> = ({ number }) => {
           <View style={{ alignItems: "center", paddingTop: 20 }}>
             <Text>Opponent's guess:</Text>
 
-            <GuessValue value={currentGuess} />
-
-            <View style={{ flexDirection: "row" }}>
-              <View style={styles.button}>
-                <Button
-                  onPress={() => tryToGuess(minBoundary.current, +currentGuess)}
-                  title={<AntDesign name="minus" size={24} />}
-                />
-              </View>
-
-              <View style={styles.button}>
-                <Button
-                  onPress={() =>
-                    tryToGuess(+currentGuess + 1, maxBoundary.current)
-                  }
-                  title={<AntDesign name="plus" size={24} />}
-                  type="primary"
-                />
-              </View>
-            </View>
+            <GameGuessControls
+              currentGuess={currentGuess}
+              onLowerTry={() => tryToGuess(minBoundary.current, +currentGuess)}
+              onGreaterTry={() =>
+                tryToGuess(+currentGuess + 1, maxBoundary.current)
+              }
+            />
           </View>
 
-          <View style={{ ...styles.containerWrapper, paddingVertical: 10 }}>
+          <View style={styles.containerWrapper}>
             <View style={styles.listContainer}>
               <FlatList
                 contentContainerStyle={styles.list}
@@ -125,11 +111,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     width: "90%",
-  },
-
-  button: {
-    marginHorizontal: 5,
-    flexGrow: 1,
   },
 
   listContainer: {

@@ -6,6 +6,7 @@ import {
   Keyboard,
   Alert,
   Dimensions,
+  KeyboardAvoidingView,
 } from "react-native"
 
 import Button from "../components/UI/Button"
@@ -18,6 +19,19 @@ import { ScreenRouterContext } from "../contexts/ScreenRouterContext"
 const StartGameScreen: React.FC = () => {
   const [numberToGuess, setNumberToGuess] = React.useState("")
   const { setRoute } = React.useContext(ScreenRouterContext)
+  const [isScreenLarge, setIsScreenLarge] = React.useState(
+    Dimensions.get("screen").height > 700
+  )
+
+  React.useEffect(() => {
+    const updateScreenState = () => {
+      setIsScreenLarge(Dimensions.get("screen").height > 700)
+    }
+
+    Dimensions.addEventListener("change", updateScreenState)
+
+    return () => Dimensions.removeEventListener("change", updateScreenState)
+  })
 
   const onNumberChange = (value: string) => {
     setNumberToGuess(value.replace(/[^0-9]/g, ""))
@@ -46,9 +60,11 @@ const StartGameScreen: React.FC = () => {
     })
   }
 
+  const screenModification = isScreenLarge ? styles.screen_large : {}
+
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-      <View style={styles.screen}>
+      <View style={{ ...styles.screen, ...screenModification }}>
         <TitleText style={styles.title}>Start a New Game!</TitleText>
         <Card style={styles.card}>
           <View style={{ marginBottom: 20 }}>
@@ -74,14 +90,16 @@ const StartGameScreen: React.FC = () => {
   )
 }
 
-const isScreenLarge = Dimensions.get("screen").height > 700
-
 const styles = StyleSheet.create({
   screen: {
     flex: 1,
-    justifyContent: isScreenLarge ? "center" : "flex-start",
+    justifyContent: "flex-start",
     alignItems: "center",
     paddingVertical: 20,
+  },
+
+  screen_large: {
+    justifyContent: "center",
   },
 
   card: {

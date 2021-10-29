@@ -13,7 +13,29 @@ type GameOverScreenProps = {
 }
 
 const GameOverScreen: React.FC<GameOverScreenProps> = props => {
+  const [isScreenLarge, setIsScreenLarge] = React.useState(
+    Dimensions.get("screen").width > 350 &&
+      Dimensions.get("screen").height > 450
+  )
+
   const { setRoute } = React.useContext(ScreenRouterContext)
+
+  React.useEffect(() => {
+    const updateScreenState = () => {
+      setIsScreenLarge(
+        Dimensions.get("screen").width > 350 &&
+          Dimensions.get("screen").height > 450
+      )
+    }
+
+    Dimensions.addEventListener("change", updateScreenState)
+
+    return () => Dimensions.removeEventListener("change", updateScreenState)
+  })
+
+  const imageContainerModification = isScreenLarge
+    ? styles.imageContainer_large
+    : {}
 
   return (
     <ScrollView contentContainerStyle={styles.screen}>
@@ -21,7 +43,9 @@ const GameOverScreen: React.FC<GameOverScreenProps> = props => {
         <TitleText style={styles.title}>The Game is Over!</TitleText>
 
         <View style={{ alignItems: "center" }}>
-          <View style={styles.imageContainer}>
+          <View
+            style={{ ...styles.imageContainer, ...imageContainerModification }}
+          >
             <Image
               source={require("../assets/images/success.png")}
               style={styles.image}
@@ -53,14 +77,12 @@ const GameOverScreen: React.FC<GameOverScreenProps> = props => {
   )
 }
 
-const isScreenLarge =
-  Dimensions.get("screen").width > 350 && Dimensions.get("screen").height > 450
-
 const styles = StyleSheet.create({
   screen: {
     flexGrow: 1,
     alignItems: "center",
     justifyContent: "center",
+    paddingVertical: 20,
   },
 
   container: {
@@ -82,14 +104,20 @@ const styles = StyleSheet.create({
   },
 
   imageContainer: {
-    width: isScreenLarge ? 300 : 200,
-    height: isScreenLarge ? 300 : 200,
+    width: 200,
+    height: 200,
     borderWidth: 3,
     borderColor: colors.primary,
-    borderRadius: isScreenLarge ? 150 : 100, // to make a circle - should be half of the width/height
+    borderRadius: 100, // to make a circle - should be half of the width/height
     overflow: "hidden",
     marginVertical: 30,
     alignItems: "center",
+  },
+
+  imageContainer_large: {
+    width: 300,
+    height: 300,
+    borderRadius: 150,
   },
 })
 
