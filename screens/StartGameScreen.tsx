@@ -5,6 +5,7 @@ import {
   TouchableWithoutFeedback,
   Keyboard,
   Alert,
+  Dimensions,
 } from "react-native"
 
 import Button from "../components/UI/Button"
@@ -48,42 +49,43 @@ const StartGameScreen: React.FC = () => {
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <View style={styles.screen}>
-        <View style={{ marginTop: "-50%" }}>
-          <TitleText style={styles.title}>Start a New Game!</TitleText>
-          <Card style={styles.card}>
-            <View style={{ marginBottom: 20 }}>
-              <Input
-                label="Enter a Number"
-                keyboardType="number-pad"
-                onChangeText={onNumberChange}
-                value={numberToGuess}
-              />
-            </View>
+        <TitleText style={styles.title}>Start a New Game!</TitleText>
+        <Card style={styles.card}>
+          <View style={{ marginBottom: 20 }}>
+            <Input
+              label="Enter a Number"
+              keyboardType="number-pad"
+              onChangeText={onNumberChange}
+              value={numberToGuess}
+            />
+          </View>
 
-            <View style={{ flexDirection: "row" }}>
-              <View style={styles.button}>
-                <Button onPress={() => setNumberToGuess("")} title="Reset" />
-              </View>
-              <View style={styles.button}>
-                <Button onPress={onConfirm} title="Confirm" type="primary" />
-              </View>
+          <View style={{ flexDirection: "row" }}>
+            <View style={styles.button}>
+              <Button onPress={() => setNumberToGuess("")} title="Reset" />
             </View>
-          </Card>
-        </View>
+            <View style={styles.button}>
+              <Button onPress={onConfirm} title="Confirm" type="primary" />
+            </View>
+          </View>
+        </Card>
       </View>
     </TouchableWithoutFeedback>
   )
 }
 
+const isScreenLarge = Dimensions.get("screen").height > 700
+
 const styles = StyleSheet.create({
   screen: {
     flex: 1,
-    justifyContent: "center",
+    justifyContent: isScreenLarge ? "center" : "flex-start",
     alignItems: "center",
+    paddingVertical: 20,
   },
 
   card: {
-    minWidth: 300,
+    width: 300,
     maxWidth: "90%",
   },
 

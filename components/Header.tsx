@@ -16,11 +16,11 @@ const Header: React.FC<HeaderComponentProps> = ({ title }) => (
 const styles = StyleSheet.create({
   header: {
     width: "100%",
-    height: 90,
+    height: 80,
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: colors.primary,
-    paddingTop: 30,
+    paddingTop: 20,
   },
 
   title: {

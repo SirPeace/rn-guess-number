@@ -1,5 +1,5 @@
 import React from "react"
-import { Image, StyleSheet, View } from "react-native"
+import { Dimensions, Image, ScrollView, StyleSheet, View } from "react-native"
 
 import Button from "../components/UI/Button"
 import Text from "../components/UI/Text"
@@ -16,7 +16,7 @@ const GameOverScreen: React.FC<GameOverScreenProps> = props => {
   const { setRoute } = React.useContext(ScreenRouterContext)
 
   return (
-    <View style={styles.screen}>
+    <ScrollView contentContainerStyle={styles.screen}>
       <View style={styles.container}>
         <TitleText style={styles.title}>The Game is Over!</TitleText>
 
@@ -49,13 +49,16 @@ const GameOverScreen: React.FC<GameOverScreenProps> = props => {
           type="primary"
         />
       </View>
-    </View>
+    </ScrollView>
   )
 }
 
+const isScreenLarge =
+  Dimensions.get("screen").width > 350 && Dimensions.get("screen").height > 450
+
 const styles = StyleSheet.create({
   screen: {
-    flex: 1,
+    flexGrow: 1,
     alignItems: "center",
     justifyContent: "center",
   },
@@ -79,11 +82,11 @@ const styles = StyleSheet.create({
   },
 
   imageContainer: {
-    width: 300,
-    height: 300,
+    width: isScreenLarge ? 300 : 200,
+    height: isScreenLarge ? 300 : 200,
     borderWidth: 3,
     borderColor: colors.primary,
-    borderRadius: 150, // to make a circle - should be half of the width/height
+    borderRadius: isScreenLarge ? 150 : 100, // to make a circle - should be half of the width/height
     overflow: "hidden",
     marginVertical: 30,
     alignItems: "center",
