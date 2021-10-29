@@ -1,5 +1,11 @@
 import React from "react"
-import { View, StyleSheet, TouchableOpacity } from "react-native"
+import {
+  View,
+  StyleSheet,
+  TouchableOpacity,
+  Platform,
+  TouchableNativeFeedback,
+} from "react-native"
 
 import colors from "../../constants/colors"
 import Text from "./Text"
@@ -14,17 +20,24 @@ type ButtonProps = {
 const Button: React.FC<ButtonProps> = props => {
   let buttonStyles = styles.button
 
-  if (props.type === "primary")
+  if (props.type === "primary") {
     buttonStyles = { ...buttonStyles, ...styles.button__primary }
+  }
+  if (props.flat) {
+    buttonStyles = { ...buttonStyles, ...styles.button__flat }
+  }
 
-  if (props.flat) buttonStyles = { ...buttonStyles, ...styles.button__flat }
+  const Touchable = Platform.select<any>({
+    ios: TouchableOpacity,
+    android: TouchableNativeFeedback,
+  })
 
   return (
-    <TouchableOpacity onPress={props.onPress} activeOpacity={0.65}>
+    <Touchable onPress={props.onPress} activeOpacity={0.65}>
       <View style={buttonStyles}>
         <Text style={styles.buttonText}>{props.title}</Text>
       </View>
-    </TouchableOpacity>
+    </Touchable>
   )
 }
 
